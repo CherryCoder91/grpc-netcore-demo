@@ -4,6 +4,7 @@ option csharp_namespace = "GrpcServer";
 
 service Persons {
 	rpc GetPerson (PersonRequest) returns (PersonResponse);
+	rpc GetPersons (PersonsRequest) returns (stream PersonResponse);
 }
 
 message PersonRequest {
@@ -15,4 +16,8 @@ message PersonResponse {
 	string firstName = 2;
 	string lastName = 3;
 	bool isVerified = 4;
+}
+
+message PersonsRequest {
+
 }

@@ -11,16 +11,16 @@ namespace GrpcClient
 
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Press enter to make gRPC Request");
+            Console.WriteLine("Press enter to make gRPC Request.");
             Console.ReadLine();
 
             var channel = GrpcChannel.ForAddress(GRPC_ADDRESS);
-            var client = new Greeter.GreeterClient(channel);
+            var client = new Persons.PersonsClient(channel);
 
-            HelloRequest request = new HelloRequest();
-            var response = await client.SayHelloAsync(request);
+            var personRequest = new PersonRequest() { UserId = 1 };
+            var reply = await client.GetPersonAsync(personRequest);
 
-            Console.WriteLine($"Message: {response.Message}");
+            Console.WriteLine($"Firstname:{reply.FirstName} LastName:{reply.LastName} Verified:{reply.IsVerified}");
 
             Console.ReadLine();
         }
